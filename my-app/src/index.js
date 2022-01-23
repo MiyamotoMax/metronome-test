@@ -19,9 +19,9 @@ const getNowTime = () => {
   const nowMinute = nowTime.getMinutes();
   const nowSecond = nowTime.getSeconds();
   const nowMillisecond = nowTime.getMilliseconds();
-  const result = 
-  nowYear + '/' + nowMonth + '/' + nowDate + ' ' + 
-  nowHour + ':' + nowMinute + ':' + nowSecond + ':' + nowMillisecond;
+  const result =
+    nowYear + '/' + nowMonth + '/' + nowDate + ' ' +
+    nowHour + ':' + nowMinute + ':' + nowSecond + ':' + nowMillisecond;
   return result;
 }
 
@@ -78,12 +78,9 @@ const tick = () => {
 tick();
 let testTimer;
 const updateStatus = () => {
-  console.log(uiData.switchStatus);
   const startMetro = () => {
-    console.log(testTimer);
     testTimer = setInterval(() => {
       uiData.time = getNowTime();
-      console.log(uiData.time);
       tick();
     }, 60000 / uiData.sliderValue);
   }
@@ -91,11 +88,9 @@ const updateStatus = () => {
     clearInterval(testTimer);
   }
   if (uiData.switchStatus) {
-    console.log('start');
     stopMetro();
     startMetro();
   } else {
-    console.log('stop');
     stopMetro();
   }
 }
