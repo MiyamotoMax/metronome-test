@@ -10,8 +10,23 @@ import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
 import Slider from '@mui/material/Slider';
 
+const getNowTime = () => {
+  const nowTime = new Date();
+  const nowYear = nowTime.getFullYear();
+  const nowMonth = nowTime.getMonth();
+  const nowDate = nowTime.getDate();
+  const nowHour = nowTime.getHours();
+  const nowMinute = nowTime.getMinutes();
+  const nowSecond = nowTime.getSeconds();
+  const nowMillisecond = nowTime.getMilliseconds();
+  const result = 
+  nowYear + '/' + nowMonth + '/' + nowDate + ' ' + 
+  nowHour + ':' + nowMinute + ':' + nowSecond + ':' + nowMillisecond;
+  return result;
+}
+
 let uiData = {
-  time: new Date().toLocaleTimeString(),
+  time: getNowTime(),
   switchStatus: false,
   sliderValue: 120
 }
@@ -20,7 +35,7 @@ const tick = () => {
     <div>
       <Container maxWidth="sm">
         <Button variant="contained" color="primary" onClick={() => {
-          uiData.time = new Date().toLocaleTimeString();
+          uiData.time = getNowTime();
           tick();
         }}>
           What time is it now?
@@ -67,7 +82,7 @@ const updateStatus = () => {
   const startMetro = () => {
     console.log(testTimer);
     testTimer = setInterval(() => {
-      uiData.time = new Date().toLocaleTimeString();
+      uiData.time = getNowTime();
       console.log(uiData.time);
       tick();
     }, 60000 / uiData.sliderValue);
@@ -84,3 +99,4 @@ const updateStatus = () => {
     stopMetro();
   }
 }
+
