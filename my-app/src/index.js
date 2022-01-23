@@ -50,7 +50,7 @@ const tick = () => {
           tick();
           updateStatus();
         }} />
-        <Typography variant="h4" component="h1" gutterBottom>
+        <Typography variant="p" component="h4" gutterBottom>
           {String(uiData.switchStatus)}
         </Typography>
         <Box sx={{ width: 300 }}>
@@ -65,7 +65,7 @@ const tick = () => {
               updateStatus();
             }}
           />
-          <Typography variant="h4" component="h1" gutterBottom>
+          <Typography variant="p" component="h4" gutterBottom>
             BPM: {String(uiData.sliderValue)}
           </Typography>
         </Box>
