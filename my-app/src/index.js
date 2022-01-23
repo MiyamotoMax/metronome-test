@@ -8,10 +8,12 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Switch from '@mui/material/Switch';
+import Slider from '@mui/material/Slider';
 
 let uiData = {
-  time:new Date().toLocaleTimeString(),
-  switchStatus: false
+  time: new Date().toLocaleTimeString(),
+  switchStatus: false,
+  sliderValue: 120
 }
 const tick = () => {
   const element = (
@@ -28,13 +30,30 @@ const tick = () => {
             {uiData.time}
           </Typography>
         </Box>
-        <Switch onClick={(event) => { 
+        <Switch onClick={(event) => {
           uiData.switchStatus = event.target.checked;
           tick();
+          updateStatus();
         }} />
         <Typography variant="h4" component="h1" gutterBottom>
-            {String( uiData.switchStatus)}
+          {String(uiData.switchStatus)}
+        </Typography>
+        <Box sx={{ width: 300 }}>
+          <Slider
+            defaultValue={120}
+            valueLabelDisplay="auto"
+            min={30}
+            max={240}
+            onChangeCommitted={(event, value) => {
+              uiData.sliderValue = value;
+              tick();
+              updateStatus();
+            }}
+          />
+          <Typography variant="h4" component="h1" gutterBottom>
+            BPM: {String(uiData.sliderValue)}
           </Typography>
+        </Box>
       </Container>
     </div>
   );
@@ -42,5 +61,26 @@ const tick = () => {
 }
 
 tick();
-//setInterval(tick, 1000);
-
+let testTimer;
+const updateStatus = () => {
+  console.log(uiData.switchStatus);
+  const startMetro = () => {
+    console.log(testTimer);
+    testTimer = setInterval(() => {
+      uiData.time = new Date().toLocaleTimeString();
+      console.log(uiData.time);
+      tick();
+    }, 60000 / uiData.sliderValue);
+  }
+  const stopMetro = () => {
+    clearInterval(testTimer);
+  }
+  if (uiData.switchStatus) {
+    console.log('start');
+    stopMetro();
+    startMetro();
+  } else {
+    console.log('stop');
+    stopMetro();
+  }
+}
